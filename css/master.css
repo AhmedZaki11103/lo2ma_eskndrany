@@ -1,0 +1,319 @@
+:root {
+  /* الأساسيات */
+  --color-primary: #a9402c; /* الأحمر الرئيسي */
+  --color-secondary: #4e8b82; /* الفيروزي */
+  --color-accent: #341f14; /* البني */
+  --color-background: #fafafa; /* الخلفية الدافئة */
+  --color-surface: #f5d391; /* الخلفيات الفاتحة داخل الكروت أو الأقسام */
+
+  /* mood btn */
+  --color-mood-btn: #2b1e13;
+
+  /* النصوص */
+  --color-text-main: #2b1e13; /* النص الأساسي */
+  --color-text-light: #fff9f2; /* النص الفاتح فوق الخلفيات الغامقة */
+  --color-text-muted: #6b3a1eb6; /* نصوص ثانوية */
+
+  /* الأزرار */
+  --btn-bg: var(--color-accent);
+  --btn-text: #fff;
+  --btn-hover-bg: #4b2a18;
+
+  /* الحدود والظلال */
+  --color-border: rgba(43, 30, 19, 0.521);
+  --color-shadow: rgba(43, 30, 19, 0.15);
+
+  /* الروابط */
+  --link-color: var(--color-secondary);
+  --link-hover: #3a6c65;
+  /* ========= */
+  --main-transition: 0.3s;
+}
+
+:root.dark {
+  --color-primary: #e36c4f; /* أحمر أفتح لمزيد من التباين */
+  --color-secondary: #3c6b64; /* فيروزي أفتح */
+  --color-accent: #8b5a36; /* بني متوسط */
+  /* --color-background: #2b1e13; غامق دافئ */
+  --color-background: #242323; /* غامق دافئ */
+  --color-surface: #3c2a1d; /* طبقة وسطى */
+
+  /* mood btn */
+  --color-mood-btn: #ffcf86;
+
+  --color-text-main: #f5d391; /* النص الأساسي بلون ذهبي فاتح */
+  --color-text-light: #fff9f2;
+  --color-text-muted: #c49e70;
+
+  --btn-bg: var(--color-primary);
+  --btn-text: #fff;
+  --btn-hover-bg: #c85c40;
+
+  --color-border: rgba(245, 211, 145, 0.2);
+  --color-shadow: rgba(0, 0, 0, 0.4);
+
+  --link-color: var(--color-secondary);
+  --link-hover: #89cbbe;
+}
+body {
+  /* font-family: "tajawal", sans-serif; */
+  font-family: "cairo", sans-serif;
+  /* font-family: "Almarai", sans-serif; */
+  /* font-family: "Amiri", serif; */
+  /* font-family: "Noto Sans Arabic", sans-serif; */
+  /* font-family: "tajawal", "cairo", sans-serif; */
+  background-color: var(--color-background);
+}
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+p {
+  line-height: 1.6;
+}
+a {
+  text-decoration: none;
+  color: var(--link-color);
+}
+a:hover {
+  color: var(--link-hover);
+}
+img {
+  max-width: 100%;
+}
+button {
+  color: var(--btn-text);
+  background-color: var(--btn-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  transition: var(--main-transition);
+}
+button:hover {
+  background-color: var(--btn-hover-bg);
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* Start */
+.hidden {
+  display: none;
+}
+/* End */
+
+/* Start Header */
+header {
+  /* background-color: var(--color-primary); */
+  background-color: var(--color-secondary);
+  background-color: var(--color-accent);
+  box-shadow: 0px 8px 8px var(--color-shadow);
+  padding-top: 8px;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* header .container .logo {
+} */
+header .container .logo + p {
+  color: var(--color-text-light);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: bold;
+}
+header .icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+header .icons > * {
+  cursor: pointer;
+  color: var(--color-text-light);
+}
+header .icons .mood {
+  color: var(--color-mood-btn);
+}
+header .icons .cart {
+  position: relative;
+}
+header .icons .cart::after {
+  position: absolute;
+  content: "5";
+  color: var(--color-text-light);
+  background-color: #f00;
+  top: -7px;
+  right: -5px;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  font-size: 10px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+header .icons .nav-icon {
+  color: var(--color-surface);
+  font-size: 20px;
+}
+nav {
+  position: absolute;
+  left: 0;
+  top: 72px;
+  width: 100%;
+  max-width: 250px;
+  z-index: 5;
+  box-shadow: 3px 8px 13px var(--color-shadow);
+}
+nav::before {
+  position: absolute;
+  content: "";
+  left: 15px;
+  bottom: 99%;
+  height: 0;
+  width: 0;
+  border: 12px solid;
+  border-color: transparent transparent var(--color-surface);
+}
+nav ul {
+  background-color: var(--color-surface);
+  padding: 5px 0;
+  border-radius: 4px;
+}
+
+nav ul li {
+  padding: 15px 10px;
+}
+nav ul li a {
+  color: var(--color-text-muted);
+  transition: var(--main-transition);
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
+}
+nav ul li a:hover {
+  transform: translateX(-5px);
+}
+nav ul li:not(:last-child) {
+  border-bottom: 1px solid var(--color-border);
+}
+.logo {
+  display: block;
+  height: 72px;
+  width: 72px;
+}
+/* End Header */
+
+/* Start categories */
+.categories .container {
+  padding-bottom: 25px;
+  padding-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.categories .container .category {
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 3px 8px 13px var(--color-shadow);
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: 17px;
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+  transition: var(--main-transition);
+  transform: rotate(-10deg);
+  flex-shrink: 0;
+}
+.categories .container .category:hover,
+.categories .container .category.active {
+  background-color: var(--color-text-muted);
+  color: var(--color-surface);
+  transform: rotate(-10deg) scale(1.1);
+}
+/* End categories */
+/* Start Items */
+.items .container {
+  padding-block: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+}
+.items .container .item-box {
+  background-color: var(--color-surface);
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 2px 4px 15px 2px var(--color-shadow);
+}
+
+.items .container .item-box .text {
+  padding: 15px;
+}
+.items .text h3 {
+  color: var(--color-text-main);
+  margin-bottom: 8px;
+}
+.items .text p {
+  color: var(--color-text-muted);
+}
+.items .text .box-feet {
+  margin-top: 8px;
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--color-border);
+}
+.items .text .box-feet span.price {
+  font-size: 18px;
+  font-weight: bold;
+  font-style: italic;
+  color: var(--color-text-main);
+}
+.items .text .box-feet button.add-item {
+  padding: 0;
+  font-size: 25px;
+  border: none;
+  background-color: transparent;
+  color: var(--color-accent);
+}
+
+.items .text .box-feet button.add-item i {
+  cursor: pointer;
+}
+/* End Items */
