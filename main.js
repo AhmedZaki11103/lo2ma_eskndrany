@@ -43,17 +43,36 @@ function showItems(arr) {
                   <p>
                     ${item.description}
                   </p>
+                  ${
+                    item.type === "sandwich"
+                      ? `<div class="additions">
+              <label>
+                <input type="radio" name="addition" value="طحينة" />
+                طحينة.
+              </label>
+              <label>
+                <input type="radio" name="addition" value="كاتشب" />
+                كاتشب.
+              </label>
+              <label>
+                <input type="radio" name="addition" value="مخلل" />
+                مخلل.
+              </label>
+            </div>`
+                      : ""
+                  }
                   <div class="box-feet">
                     <span class="price">${item.price} EGP</span>
-                    <button class="add-item">
+                    <button class="add-item" id="${item.id}">
                       <i class="fa-regular fa-square-plus"></i>
                     </button>
                   </div>
                 </div>
               </div>`;
   });
+  // Add To Cart
+  AddToCart(arr);
 }
-
 fetch("items.json")
   .then((res) => res.json())
   .then((re) => {
@@ -89,3 +108,59 @@ fetch("items.json")
     showItems(sandwich);
   });
 // End Items
+
+// Start Cart
+// open & Close
+const cartIcon = document.querySelector("header .icons .cart-icon");
+const cartIconClose = document.querySelector(".cart .cart-head i");
+const cart = document.querySelector(".cart");
+cartIcon.addEventListener("click", () => {
+  cart.classList.toggle("show");
+});
+cartIconClose.addEventListener("click", () => {
+  cart.classList.toggle("show");
+});
+// Add To Cart
+function AddToCart(arr) {
+  let addBtns = document.querySelectorAll(".items .text .box-feet .add-item");
+  addBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const itemId = e.currentTarget.id;
+      const selectedItem = arr.find((i) => i.id === itemId);
+      
+      showInCart(selectedItem);
+
+      cart.classList.add("show");
+      e.currentTarget.classList.add("done");
+      let cartLS = JSON.parse(localStorage.getItem("cartLS")) || [];
+      cartLS.push({ ...selectedItem, quantity: 1 });
+      localStorage.setItem("cartLS", JSON.stringify(cartLS));
+    });
+  });
+}
+// Show In Cart
+function showInCart(selectedItem) {
+  let itemsInCart = document.querySelector(".cart .items-in-cart");
+  itemsInCart.innerHTML += `
+      <div class="item-box-in-cart">
+          <img src="${selectedItem.img}" alt="iamge" />
+          <div class="text">
+            <h4> ${selectedItem.name} <br />${
+    selectedItem.type === "sandwich" ? `<span>+ بطاطس + طحينة</span>` : ""
+  } </h4>
+            <span class="price-in-cart">${selectedItem.price} EGP</span>
+            <div class="number-of-item">
+              <button class="decrease">-</button
+              ><span class="item-count">0</span
+              ><button class="increase">+</button>
+            </div>
+          </div>
+          <div class="trash"><i class="fa-solid fa-trash-can"></i></div>
+        </div>`;
+}
+window.addEventListener("load", () => {
+  let itemsInCart = document.querySelector(".cart .items-in-cart");
+  let cartLS = JSON.parse(localStorage.getItem("cartLS")) || [];
+  cartLS.forEach((item) => showInCart(item));
+});
+// End Cart
