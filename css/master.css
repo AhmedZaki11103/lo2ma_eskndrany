@@ -407,6 +407,8 @@ nav ul li:not(:last-child) {
   flex-direction: column;
   gap: 15px;
   border-top: 1px solid var(--color-border);
+  background-color: var(--color-background);
+  padding-bottom: 45px;
 }
 .cart .cart-feet .cart-feet-one {
   display: flex;
@@ -422,3 +424,4 @@ nav ul li:not(:last-child) {
   padding-top: 5px;
 }
 /* End Cart */
+
