@@ -311,17 +311,17 @@ nav ul li:not(:last-child) {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: -3px 0px 8px var(--color-shadow);
+  box-shadow: -3px 3px 8px var(--color-shadow);
   background-color: var(--color-background);
   border-left: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
   width: 270px;
   position: fixed;
   top: 0;
   z-index: 10;
   right: -100%;
-  /* right: 0; */
   transition: 0.5s;
-  height: 100vh;
+  height: 90vh;
   overflow: hidden;
 }
 .cart.show {
@@ -408,7 +408,6 @@ nav ul li:not(:last-child) {
   gap: 15px;
   border-top: 1px solid var(--color-border);
   background-color: var(--color-background);
-  padding-bottom: 45px;
 }
 .cart .cart-feet .cart-feet-one {
   display: flex;
@@ -424,4 +423,3 @@ nav ul li:not(:last-child) {
   padding-top: 5px;
 }
 /* End Cart */
-
