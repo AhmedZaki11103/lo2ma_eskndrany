@@ -139,9 +139,8 @@ header .icons .mood {
 header .icons .cart-icon {
   position: relative;
 }
-header .icons .cart-icon::after {
+header .icons .cart-icon span {
   position: absolute;
-  content: "5";
   color: var(--color-text-light);
   background-color: #f00;
   top: -7px;
@@ -321,7 +320,7 @@ nav ul li:not(:last-child) {
   z-index: 10;
   right: -100%;
   transition: 0.5s;
-  height: 80vh;
+  height: 90vh;
   overflow: hidden;
 }
 .cart.show {
@@ -388,7 +387,7 @@ nav ul li:not(:last-child) {
 .cart .item-box-in-cart .text .price-in-cart {
   font-weight: bold;
 }
-.cart .item-box-in-cart .text .number-of-item span {
+.cart .item-box-in-cart .text .number-of-item span.quantity {
   width: 10px;
   margin: 0 5px;
 }
@@ -423,4 +422,3 @@ nav ul li:not(:last-child) {
   padding-top: 5px;
 }
 /* End Cart */
-

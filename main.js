@@ -47,15 +47,15 @@ function showItems(arr) {
                     item.type === "sandwich"
                       ? `<div class="additions">
               <label>
-                <input type="radio" name="addition" value="طحينة" />
+                <input type="radio"name="addition-${item.id}" value="طحينة" checked />
                 طحينة.
               </label>
               <label>
-                <input type="radio" name="addition" value="كاتشب" />
+                <input type="radio"name="addition-${item.id}" value="كاتشب" />
                 كاتشب.
               </label>
               <label>
-                <input type="radio" name="addition" value="مخلل" />
+                <input type="radio"name="addition-${item.id}" value="مخلل" />
                 مخلل.
               </label>
             </div>`
@@ -97,6 +97,8 @@ fetch("items.json")
           break;
         case "offers":
           offers.push(item);
+          break;
+
         default:
           break;
       }
@@ -113,54 +115,272 @@ fetch("items.json")
 // open & Close
 const cartIcon = document.querySelector("header .icons .cart-icon");
 const cartIconClose = document.querySelector(".cart .cart-head i");
+const shopMorebtn = document.querySelector(".cart .cart-feet-two .shop-more");
 const cart = document.querySelector(".cart");
+
 cartIcon.addEventListener("click", () => {
   cart.classList.toggle("show");
 });
 cartIconClose.addEventListener("click", () => {
   cart.classList.toggle("show");
 });
+shopMorebtn.addEventListener("click", () => {
+  cart.classList.toggle("show");
+});
+
 // Add To Cart
 function AddToCart(arr) {
   let addBtns = document.querySelectorAll(".items .text .box-feet .add-item");
+  disabledbtuns(addBtns);
+
   addBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const itemId = e.currentTarget.id;
       const selectedItem = arr.find((i) => i.id === itemId);
-      
-      showInCart(selectedItem);
+      let selectedAddition = "";
+      if (selectedItem.type === "sandwich") {
+        const itemBox = e.currentTarget.closest(".item-box");
+        const checkedAddition = itemBox.querySelector(
+          ".additions input:checked"
+        );
+        selectedAddition = checkedAddition
+          ? checkedAddition.value
+          : "بدون إضافات";
+      }
+      showInCart(selectedItem, selectedAddition);
 
       cart.classList.add("show");
       e.currentTarget.classList.add("done");
+
+      removeFromCart();
+
       let cartLS = JSON.parse(localStorage.getItem("cartLS")) || [];
-      cartLS.push({ ...selectedItem, quantity: 1 });
+      cartLS.push({ ...selectedItem, addition: selectedAddition, quantity: 1 });
       localStorage.setItem("cartLS", JSON.stringify(cartLS));
+      Itemscount();
+      //
     });
   });
 }
 // Show In Cart
-function showInCart(selectedItem) {
+function showInCart(selectedItem, selectedAddition = "") {
   let itemsInCart = document.querySelector(".cart .items-in-cart");
+
   itemsInCart.innerHTML += `
       <div class="item-box-in-cart">
           <img src="${selectedItem.img}" alt="iamge" />
           <div class="text">
             <h4> ${selectedItem.name} <br />${
-    selectedItem.type === "sandwich" ? `<span>+ بطاطس + طحينة</span>` : ""
+    selectedItem.type === "sandwich"
+      ? `<span>+ بطاطس + ${selectedAddition}</span>`
+      : ""
   } </h4>
             <span class="price-in-cart">${selectedItem.price} EGP</span>
             <div class="number-of-item">
-              <button class="decrease">-</button
-              ><span class="item-count">0</span
-              ><button class="increase">+</button>
+              <button class="decrease" data-id="${selectedItem.id}">-</button
+              ><span class="quantity">${selectedItem.quantity || 1}</span
+              ><button class="increase" data-id="${selectedItem.id}" >+</button>
             </div>
           </div>
-          <div class="trash"><i class="fa-solid fa-trash-can"></i></div>
+          <div class="trash" id="${
+            selectedItem.id
+          }"><i class="fa-solid fa-trash-can"></i></div>
         </div>`;
 }
+
 window.addEventListener("load", () => {
-  let itemsInCart = document.querySelector(".cart .items-in-cart");
   let cartLS = JSON.parse(localStorage.getItem("cartLS")) || [];
-  cartLS.forEach((item) => showInCart(item));
+  cartLS.forEach((item) => showInCart(item, item.addition));
+  removeFromCart();
+  Itemscount();
+  disabledbtuns(document.querySelectorAll(".items .text .box-feet .add-item"));
 });
+
+function disabledbtuns(btns) {
+  let cartLS = JSON.parse(localStorage.getItem("cartLS")) || [];
+  if (cartLS.length > 0) {
+    let disabledbtuns = [];
+    cartLS.forEach((itemInCart) => {
+      btns.forEach((btn) => {
+        if (btn.id === itemInCart.id) disabledbtuns.push(btn);
+      });
+    });
+    disabledbtuns.forEach((btn) => {
+      btn.classList.add("done");
+    });
+  } else return;
+}
+// Remove From Cart
+function removeFromCart() {
+  const cartContainer = document.querySelector(".cart .items-in-cart");
+  cartContainer.addEventListener("click", function (e) {
+    const trash = e.target.closest(".trash");
+    if (!trash) return;
+
+    const itemId = trash.id;
+    trash.parentElement.remove();
+
+    let cartLS = JSON.parse(localStorage.getItem("cartLS")) || [];
+    let newcartLS = cartLS.filter((item) => item.id !== itemId);
+    localStorage.setItem("cartLS", JSON.stringify(newcartLS));
+
+    Itemscount();
+    const addBtn = document.getElementById(itemId);
+    if (addBtn) addBtn.classList.remove("done");
+  });
+}
+
+// function removeFromCart() {
+//   let trashbtns = document.querySelectorAll(
+//     ".cart .items-in-cart .item-box-in-cart .trash"
+//   );
+//   trashbtns.forEach((btn) => {
+//     btn.addEventListener("click", function (e) {
+//       // =========
+//       this.parentElement.remove();
+//       let cartLS = JSON.parse(localStorage.getItem("cartLS")) || [];
+//       let newcartLS = cartLS.filter((item) => item.id !== this.id);
+//       localStorage.setItem("cartLS", JSON.stringify(newcartLS));
+//       Itemscount();
+//       const addBtn = document.getElementById(this.id);
+//       if (addBtn) addBtn.classList.remove("done");
+//     });
+//   });
+// }
+
+// Start Cart
+function Itemscount() {
+  let cartLS = JSON.parse(localStorage.getItem("cartLS")) || [];
+
+  // تحديث العدادات
+  updateCartCounters(cartLS);
+
+  // إضافة event listeners للأزرار مرة واحدة فقط
+  setupQuantityButtons();
+}
+
+function setupQuantityButtons() {
+  const cartContainer = document.querySelector(".cart .items-in-cart");
+
+  // إزالة ال event listeners القديمة
+  cartContainer.replaceWith(cartContainer.cloneNode(true));
+  removeFromCart();
+  const newContainer = document.querySelector(".cart .items-in-cart");
+
+  newContainer.addEventListener("click", function (e) {
+    const itemId = e.target.dataset.id;
+    if (!itemId) return;
+
+    let cartLS = JSON.parse(localStorage.getItem("cartLS")) || [];
+    const itemIndex = cartLS.findIndex((item) => item.id === itemId);
+    if (itemIndex === -1) return;
+
+    if (e.target.classList.contains("increase")) {
+      cartLS[itemIndex].quantity++;
+      updateQuantityDisplay(
+        e.target.previousElementSibling,
+        cartLS[itemIndex].quantity
+      );
+    } else if (
+      e.target.classList.contains("decrease") &&
+      cartLS[itemIndex].quantity > 1
+    ) {
+      cartLS[itemIndex].quantity--;
+      updateQuantityDisplay(
+        e.target.nextElementSibling,
+        cartLS[itemIndex].quantity
+      );
+    } else {
+      return;
+    }
+
+    localStorage.setItem("cartLS", JSON.stringify(cartLS));
+    updateCartCounters(cartLS);
+  });
+}
+
+function updateQuantityDisplay(element, quantity) {
+  element.innerHTML = quantity;
+}
+
+function updateCartCounters(cartLS) {
+  let countCartIcon = document.querySelector("header .icons .cart-icon span");
+  let itemsCountEl = document.querySelector(".cart .cart-items-counter");
+
+  let countQuantity = 0;
+  cartLS.forEach((item) => {
+    countQuantity += item.quantity;
+  });
+
+  countCartIcon.innerHTML = cartLS.length;
+  itemsCountEl.innerHTML = countQuantity;
+  updateSubTotal(cartLS);
+}
+
+function updateSubTotal(cartLS) {
+  let subTotal = document.querySelector(".cart .cart-feet-one .sub-total");
+  let totalPrice = 0;
+  cartLS.forEach((item) => {
+    totalPrice += +item.price * item.quantity;
+  });
+  subTotal.innerHTML = `EGP ${totalPrice}`;
+}
+// End Cart
+// function Itemscount() {
+//   let cartLS = JSON.parse(localStorage.getItem("cartLS"));
+//   let countCartIcon = document.querySelector("header .icons .cart-icon span");
+//   countCartIcon.innerHTML = cartLS.length;
+//   // =======
+//   let itemsCountEl = document.querySelector(".cart .cart-items-counter");
+//   let countQuantity = 0;
+//   cartLS.forEach((item) => {
+//     countQuantity += item.quantity;
+//   });
+//   itemsCountEl.innerHTML = countQuantity;
+//   // =======
+
+//   // let decreaseBtn = document.querySelectorAll(".cart button.decrease");
+//   // let increaseBtn = document.querySelectorAll(".cart button.increase");
+//   // decreaseBtn.forEach((btn) => {
+//   //   btn.addEventListener("click", function (e) {
+//   //     cartLS.forEach((item) => {
+//   //       if (this.dataset.id === item.id) {
+//   //         if (item.quantity > 1) {
+//   //           item.quantity--;
+//   //           itemsCountEl.innerHTML = +itemsCountEl.innerHTML - 1;
+//   //           updateSubTotal(cartLS);
+//   //         }
+//   //         let quantity = this.nextElementSibling;
+//   //         quantity.innerHTML = item.quantity;
+//   //       }
+//   //     });
+//   //     localStorage.setItem("cartLS", JSON.stringify(cartLS));
+//   //   });
+//   // });
+//   // increaseBtn.forEach((btn) => {
+//   //   btn.addEventListener("click", function (e) {
+//   //     cartLS.forEach((item) => {
+//   //       if (this.dataset.id === item.id) {
+//   //         item.quantity++;
+//   //         itemsCountEl.innerHTML = +itemsCountEl.innerHTML + 1;
+//   //         updateSubTotal(cartLS);
+//   //       }
+//   //       let quantity = this.previousElementSibling;
+//   //       quantity.innerHTML = item.quantity;
+//   //     });
+//   //     localStorage.setItem("cartLS", JSON.stringify(cartLS));
+//   //   });
+//   // });
+//   // =======
+//   updateSubTotal(cartLS);
+// }
+// function updateSubTotal(cartLS) {
+//   let subTotal = document.querySelector(".cart .cart-feet-one .sub-total");
+//   let totalPrice = 0;
+//   cartLS.forEach((item) => {
+//     totalPrice += +item.price * item.quantity;
+//   });
+//   subTotal.innerHTML = `EGP ${totalPrice}`;
+// }
+
 // End Cart
