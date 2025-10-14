@@ -95,7 +95,7 @@ if (sub) {
     }
 
     if (order) {
-      const msg = `\u202B *الاسم:* ${name.value}\n *الرقم:* ${num.value}\n *العنوان:* ${address.value}\n *الطلب:*\n${order}\n💰 *الإجمالي:* ${total}\u202C`;
+      const msg = `\u202B *الاسم:* ${name.value}\n *الرقم:* ${num.value}\n *العنوان:* ${address.value}\n *الطلب:*\n${order}\n💰 *الإجمالي:* ${total} ج\u202C`;
       // console.log(msg);
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
       localStorage.removeItem("cartLS");
