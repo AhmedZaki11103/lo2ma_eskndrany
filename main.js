@@ -126,6 +126,9 @@ cartIconClose.addEventListener("click", () => {
 });
 shopMorebtn.addEventListener("click", () => {
   cart.classList.toggle("show");
+  if (window.location.href.includes("cart.html")) {
+    window.location.href = "index.html";
+  }
 });
 
 // Add To Cart
@@ -316,7 +319,7 @@ function updateCartCounters(cartLS) {
   itemsCountEl.innerHTML = countQuantity;
   updateSubTotal(cartLS);
 }
-
+import { showInCartkkk } from "./cart.js";
 function updateSubTotal(cartLS) {
   let subTotal = document.querySelector(".cart .cart-feet-one .sub-total");
   let totalPrice = 0;
@@ -324,7 +327,13 @@ function updateSubTotal(cartLS) {
     totalPrice += +item.price * item.quantity;
   });
   subTotal.innerHTML = `EGP ${totalPrice}`;
+  showInCartkkk();
 }
+
+const checkOutBtn = document.querySelector(".check-out-in-cart");
+checkOutBtn.addEventListener("click", () => {
+  window.location.href = "cart.html";
+});
 // End Cart
 // function Itemscount() {
 //   let cartLS = JSON.parse(localStorage.getItem("cartLS"));
@@ -384,3 +393,6 @@ function updateSubTotal(cartLS) {
 // }
 
 // End Cart
+let copy = document.querySelector(".copy");
+copy.innerHTML = new Date().getFullYear();
+// =============

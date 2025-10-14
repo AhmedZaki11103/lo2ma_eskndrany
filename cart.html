@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/all.min.css" />
     <!-- Main Style File -->
     <link rel="stylesheet" href="css/master.css" />
+    <link rel="stylesheet" href="css/cart.css" />
   </head>
   <body>
     <!-- Start Header -->
@@ -36,7 +37,7 @@
         <nav class="hidden">
           <ul class="header-links">
             <li><a href="index.html">الصفحة الرئيسية.</a></li>
-            <li><a href="cart.html">السلة.</a></li>
+            <li><a href="cary.html">السلة.</a></li>
             <li>
               <a
                 href="https://maps.app.goo.gl/wcHvHkhausgpLsYE9"
@@ -47,14 +48,6 @@
             <li><a href="#footer">اتصل بنا.</a></li>
           </ul>
         </nav>
-      </div>
-      <div class="categories">
-        <div class="container">
-          <div class="category sandwich active">ساندوتش</div>
-          <div class="category juice">مشروبات</div>
-          <div class="category addition">إضافات</div>
-          <div class="category offers">عروض</div>
-        </div>
       </div>
     </header>
     <!-- End Header -->
@@ -78,11 +71,32 @@
       </div>
     </div>
     <!-- End cart -->
-    <!-- Start items -->
-    <div class="items">
-      <div class="container"></div>
+    <div class="order">
+      <div class="container">
+        <div class="items-in-cart-page">
+          <h3>إتمام الطلب</h3>
+          <div class="items"></div>
+          <div class="feet">
+            <span>الإجمالي: </span> <span class="total">0 EGP</span>
+          </div>
+        </div>
+        <div class="contact-info">
+          <form action="">
+            <input type="text" placeholder="الاسم" class="inputName" required />
+            <input
+            dir="rtl"
+            type="tel"
+            placeholder="رقم الهاتف"
+            class="inputNumber"
+            required
+            />
+            <input type="text" placeholder="العنوان" class="inputAddress" required />
+            <button class="check-out-btn">إرسال الطلب</button>
+          </form>
+        </div>
+      </div>
     </div>
-    <!-- End items -->
+
     <!-- Start Footer -->
     <footer id="footer">
       <div class="container">
@@ -135,5 +149,6 @@
     </footer>
     <!-- End Footer -->
     <script src="main.js" type="module"></script>
+    <script src="cart.js" type="module"></script>
   </body>
 </html>
