@@ -48,6 +48,13 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+div {
+  outline: none;
+  -webkit-tap-highlight-color: transparent; /* مهم للموبايلات */
+}
+div:focus {
+  outline: none;
+}
 ul {
   list-style: none;
 }
@@ -499,31 +506,27 @@ footer .container .social p {
 /* ============================== */
 footer .contact > * {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
   line-height: 1.8;
 }
 footer .contact i {
   font-size: 25px;
   color: var(--main-color);
-  margin-right: 15px;
-}
-@media (max-width: 767px) {
-  footer .contact > * {
-    flex-direction: column;
-  }
-  footer .contact i {
-    margin: 0 0 5px;
-  }
+  margin: 0 0 5px;
 }
 footer .contact a {
   color: #b9b9b9;
   transition: var(--main-transition);
-  display: block;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 footer .contact a:hover {
   color: var(--main-color);
-  padding-right: 5px;
+  /* padding-right: 5px; */
 }
 /* ========================= */
 footer .copyRight {
