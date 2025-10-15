@@ -65,22 +65,21 @@ window.addEventListener("load", showInCartkkk);
 //     alert("السلة فاضية، ضيف منتجات قبل الإرسال!");
 //   }
 // });
-const phone = "201286113602";
+const phone = "201554942616";
 let name = document.querySelector(".inputName");
 let num = document.querySelector(".inputNumber");
 let address = document.querySelector(".inputAddress");
-let sub = document.querySelector(".check-out-btn");
+let comments = document.querySelector(".comments");
+let sub = document.querySelector("form");
 if (sub) {
-  sub.addEventListener("click", (e) => {
+  sub.addEventListener("submit", (e) => {
     e.preventDefault();
-
     let ls = JSON.parse(localStorage.getItem("cartLS")) || [];
     let order = "";
     let total = 0;
 
     if (ls.length > 0) {
       ls.forEach((item) => {
-        // لو نوع المنتج ساندوتش، أضف الإضافة
         let additionText = "";
         if (item.type === "sandwich" && item.addition) {
           additionText = ` + ${item.addition}`;
@@ -95,8 +94,12 @@ if (sub) {
     }
 
     if (order) {
-      const msg = `\u202B *الاسم:* ${name.value}\n *الرقم:* ${num.value}\n *العنوان:* ${address.value}\n *الطلب:*\n${order}\n💰 *الإجمالي:* ${total} ج\u202C`;
-      // console.log(msg);
+      let commentsValue = "";
+      comments.value !== ""
+        ? (commentsValue = `*ملاحظات:* ${comments.value}`)
+        : (commentsValue = "");
+
+      const msg = `\u202B *الاسم:* ${name.value}\n *الرقم:* ${num.value}\n *العنوان:* ${address.value}\n *الطلب:*\n${order}\n *الإجمالي:* ${total} ج\n ${commentsValue} \u202C`;
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`);
       localStorage.removeItem("cartLS");
       window.location.reload();

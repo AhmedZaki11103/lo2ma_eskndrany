@@ -62,6 +62,7 @@ a:hover {
   /* color: var(--link-hover); */
 }
 img {
+  width: 100%;
   max-width: 100%;
   box-shadow: -2px 2px 12px var(--color-shadow);
 }
@@ -613,9 +614,12 @@ footer .copyRight .container span.zaki {
   padding: 15px;
   gap: 10px;
 }
-
 .order .container .contact-info form > * {
   padding: 10px 5px;
   border: 1px solid #ccc;
+}
+.order .container .contact-info form textarea {
+  height: 100px;
+  resize: none;
 }
 /* End Cart Page */

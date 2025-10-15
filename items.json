@@ -2,39 +2,39 @@
   {
     "id": "01",
     "type": "sandwich",
-    "img": "imgs/item.jpg",
-    "name":  "سندوتش كبدة",
+    "img": "imgs/item1.jpg",
+    "name": "سندوتش كبدة",
     "description": "يضاف مع الساندوتش بطاطس + طحينة أو كاتشب أو مخلل:",
     "price": "40"
   },
   {
     "id": "02",
     "type": "sandwich",
-    "img": "imgs/item.jpg",
-    "name" : "سندوتش سدق",
+    "img": "imgs/item1.jpg",
+    "name": "سندوتش سدق",
     "description": "يضاف مع الساندوتش بطاطس + طحينة أو كاتشب أو مخلل:",
     "price": "50"
   },
   {
     "id": "03",
     "type": "sandwich",
-    "img": "imgs/item.jpg",
-    "name":  "سندوتش كلاوي",
+    "img": "imgs/item1.jpg",
+    "name": "سندوتش كلاوي",
     "description": "يضاف مع الساندوتش بطاطس + طحينة أو كاتشب أو مخلل:",
     "price": "40"
   },
   {
     "id": "04",
     "type": "sandwich",
-    "img": "imgs/item.jpg",
-    "name":  "سندوتش بطاطس",
+    "img": "imgs/item1.jpg",
+    "name": "سندوتش بطاطس",
     "description": "يضاف مع الساندوتش بطاطس + طحينة أو كاتشب أو مخلل:",
     "price": "25"
   },
   {
     "id": "05",
     "type": "sandwich",
-    "img": "imgs/item.jpg",
+    "img": "imgs/item1.jpg",
     "name": "سندوتش بطاطس شيدر",
     "description": "يضاف مع الساندوتش بطاطس + طحينة أو كاتشب أو مخلل:",
     "price": "35"
@@ -42,15 +42,15 @@
   {
     "id": "06",
     "type": "sandwich",
-    "img": "imgs/item.jpg",
-    "name":  "سندوتش سوسيس",
+    "img": "imgs/item1.jpg",
+    "name": "سندوتش سوسيس",
     "description": "يضاف مع الساندوتش بطاطس + طحينة أو كاتشب أو مخلل:",
     "price": "40"
   },
   {
     "id": "07",
     "type": "sandwich",
-    "img": "imgs/item.jpg",
+    "img": "imgs/item1.jpg",
     "name": "سندوتش فاهيتا لحمة",
     "description": "يضاف مع الساندوتش بطاطس + طحينة أو كاتشب أو مخلل:",
     "price": "65"
@@ -58,7 +58,7 @@
   {
     "id": "08",
     "type": "sandwich",
-    "img": "imgs/item.jpg",
+    "img": "imgs/item1.jpg",
     "name": "سندوتش فاهيتا فراخ",
     "description": "يضاف مع الساندوتش بطاطس + طحينة أو كاتشب أو مخلل:",
     "price": "60"
@@ -74,7 +74,7 @@
   {
     "id": "102",
     "type": "juice",
-    "img": "imgs/item2.jpg",
+    "img": "imgs/item21.jpg",
     "name": "مياه معدنية",
     "description": "مياه معدنية",
     "price": "10"
@@ -82,7 +82,7 @@
   {
     "id": "201",
     "type": "addition",
-    "img": "imgs/item3.jpg",
+    "img": "imgs/شيدر.png",
     "name": "صوص شيدر",
     "description": "",
     "price": "15"
@@ -90,7 +90,7 @@
   {
     "id": "202",
     "type": "addition",
-    "img": "imgs/item3.jpg",
+    "img": "imgs/بطاطس.png",
     "name": "باكيت بطاطس",
     "description": "",
     "price": "15"
@@ -98,7 +98,7 @@
   {
     "id": "203",
     "type": "addition",
-    "img": "imgs/item3.jpg",
+    "img": "imgs/مخلل.png",
     "name": "مخلل",
     "description": "",
     "price": "5"
@@ -106,7 +106,7 @@
   {
     "id": "204",
     "type": "addition",
-    "img": "imgs/item3.jpg",
+    "img": "imgs/طحينة.png",
     "name": "طحينة",
     "description": "",
     "price": "5"
@@ -117,7 +117,7 @@
     "img": "imgs/item4.jpg",
     "name": "عرض",
     "description": "",
-    "price": "75"
+    "price": "00"
   },
   {
     "id": "302",
@@ -125,6 +125,6 @@
     "img": "imgs/item4.jpg",
     "name": "عرض",
     "description": "",
-    "price": "75"
+    "price": "00"
   }
 ]

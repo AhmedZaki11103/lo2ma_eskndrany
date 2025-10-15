@@ -86,17 +86,34 @@
             <input
               dir="rtl"
               type="tel"
+              pattern="^01[0-2,5]{1}[0-9]{8}$"
               placeholder="رقم الهاتف"
+              id="phone"
               class="inputNumber"
               required
             />
+            <script>
+              const phoneInput = document.getElementById("phone");
+              phoneInput.addEventListener("input", () => {
+                phoneInput.setCustomValidity("");
+                if (!phoneInput.checkValidity()) {
+                  phoneInput.setCustomValidity(
+                    "من فضلك أدخل رقم صحيح يبدأ بـ 01 ويتكون من 11 رقم "
+                  );
+                }
+              });
+            </script>
             <input
               type="text"
               placeholder="العنوان"
               class="inputAddress"
               required
             />
-            <button class="check-out-btn">إرسال الطلب</button>
+            <textarea
+              class="comments"
+              placeholder="أي ملاحظات تخص الطلب؟"
+            ></textarea>
+            <button type="submit" class="check-out-btn">إرسال الطلب</button>
           </form>
         </div>
       </div>

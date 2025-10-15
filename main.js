@@ -37,7 +37,10 @@ function showItems(arr) {
   items.innerHTML = "";
   arr.forEach((item) => {
     items.innerHTML += `<div class="item-box">
-                <img src="${item.img}" alt="item-image" />
+                <div class="item-img"> <img src="${
+                  item.img
+                }" alt="item-image" /> </div>
+                
                 <div class="text">
                   <h3>${item.name}</h3>
                   <p>
@@ -322,6 +325,7 @@ function updateCartCounters(cartLS) {
 import { showInCartkkk } from "./cart.js";
 function updateSubTotal(cartLS) {
   let subTotal = document.querySelector(".cart .cart-feet-one .sub-total");
+
   let totalPrice = 0;
   cartLS.forEach((item) => {
     totalPrice += +item.price * item.quantity;
